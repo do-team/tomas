@@ -1,37 +1,36 @@
-#Kalkulacka do AWS
+def exports_Handler = (event, context, callback):
 
-exports.handler = (event, context, callback) => {
-
-print(event)
-A = event.numbera
-B = event.numberb
-C = 0
-operation = event.operation
-response = {
+    A = event.numbera
+    B = event.numberb
+    C = 0
+    operation = event.operation
+    response = {
     "result": null,
     "numbera": A,
     "numberb": B,
     "operation": operation
     }
+    return (A, B, C, response)
+
 
 
 #operators
 
 if operation == "*":
-    C = ('{} * {} ='.format(A, B)
+    C = ('{} * {} ='.format(A, B))
     response.result = C
 
 elif operation == "/":
-    C = ('{} / {} ='.format(A, B)
+    C = ('{} / {} ='.format(A, B))
     response.result = C
 
 elif operation == "+":
-    C = ('{} + {} ='.format(A, B)
+    C = ('{} + {} ='.format(A, B))
     response.result = C
 
 elif operation == "-":
-    C = ('{} - {} ='.format(A, B)
+    C = ('{} - {} ='.format(A, B))
     response.result = C
 
   callback(null, response);
-}
+};
