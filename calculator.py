@@ -1,36 +1,25 @@
+
 def exports_Handler = (event, context, callback):
+    import json
+    incoming = json.dumps(event)
+    valid = json.loads(incoming)
 
-    A = event.numbera
-    B = event.numberb
-    C = 0
-    operation = event.operation
-    response = {
-    "result": null,
-    "numbera": A,
-    "numberb": B,
-    "operation": operation
-    }
-    return (A, B, C, response)
+     if valid['operation'] == "sum":
+        result = valid['numbera'] + valid['numberb']
 
+    elif valid['operation'] == "sub":
+        result = valid['numbera']-valid['numberb']
 
+    elif valid['operation'] == "mult":
+        result = valid['numbera']*valid['numberb']
 
-#operators
+    elif valid['operation'] == "div":
+        result = valid['numbera']/valid['numberb']
 
-if operation == "*":
-    C = ('{} * {} ='.format(A, B))
-    response.result = C
+    else:
+        result = "unsupported operation: " + str(valid['operation']) + ", supported operations: \"sum\", \"div\", \"sub\", \"mult\"."
 
-elif operation == "/":
-    C = ('{} / {} ='.format(A, B))
-    response.result = C
+    response = {}
+    response['result'] = result
 
-elif operation == "+":
-    C = ('{} + {} ='.format(A, B))
-    response.result = C
-
-elif operation == "-":
-    C = ('{} - {} ='.format(A, B))
-    response.result = C
-
-  callback(null, response);
-};
+    return (response)
